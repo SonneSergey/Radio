@@ -136,4 +136,25 @@ public class RadioTest {
         radio.decreaseVolume();
         assertEquals(0, radio.getCurrentVolume()); // Ожидаем, что громкость останется минимальной
     }
+
+    @Test
+    public void shouldSetVolumeWithinRange() {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(50); // значение внутри диапазона
+        assertEquals(50, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldNotSetVolumeBelowMin() {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(-1); // значение ниже минимального
+        assertEquals(0, radio.getCurrentVolume()); // громкость не изменится
+    }
+
+    @Test
+    public void shouldNotSetVolumeAboveMax() {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(101); // значение выше максимального
+        assertEquals(0, radio.getCurrentVolume()); // громкость не изменится
+    }
 }
